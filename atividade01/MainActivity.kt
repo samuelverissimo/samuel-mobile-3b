@@ -24,30 +24,42 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+
             Column(modifier = Modifier.padding(16.dp)) {
 
-                MessageCard(Message("Android", "Jetpack Compose"))
+                MessageCard(
+                    Message("Android", "Jetpack Compose", R.drawable.pfp1)
+                )
+
                 Spacer(modifier = Modifier.height(16.dp))
 
-                MessageCard(Message("Android", "Jetpack Compose"))
+                MessageCard(
+                    Message("Samuel", "Aprendendo Jetpack Compose", R.drawable.pfp2)
+                )
+
                 Spacer(modifier = Modifier.height(16.dp))
 
-                MessageCard(Message("Android", "Jetpack Compose"))
-
+                MessageCard(
+                    Message("Lexi", "Compose é incrível!", R.drawable.pfp3)
+                )
             }
         }
     }
 }
 
-data class Message(val author: String, val body: String)
+data class Message(
+    val author: String,
+    val body: String,
+    val image: Int
+)
 
 @Composable
 fun MessageCard(msg: Message) {
     Row(modifier = Modifier.padding(all = 8.dp)) {
 
         Image(
-            painter = painterResource(R.drawable.pfp_legal),
-            contentDescription = "Contact profile picture",
+            painter = painterResource(msg.image),
+            contentDescription = "Foto de perfil",
             modifier = Modifier
                 .size(40.dp)
                 .clip(CircleShape)
@@ -66,25 +78,26 @@ fun MessageCard(msg: Message) {
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 fun PreviewMessageCard() {
+
     Column(modifier = Modifier.padding(16.dp)) {
 
         MessageCard(
-            msg = Message("Lexi", "Hey, take a look at Jetpack Compose, it's great!")
+            Message("Lexi", "Hey, take a look at Jetpack Compose!", R.drawable.pfp1)
         )
 
         Spacer(modifier = Modifier.height(16.dp))
 
         MessageCard(
-            msg = Message("Samuel", "Jetpack Compose é muito bom!")
+            Message("Samuel", "Jetpack Compose é muito bom!", R.drawable.pfp2)
         )
 
         Spacer(modifier = Modifier.height(16.dp))
 
         MessageCard(
-            msg = Message("Android", "Bem-vindo ao Compose!")
+            Message("Android", "Bem-vindo ao Compose!", R.drawable.pfp3)
         )
     }
 }
